@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Homepage admin </title>
+</head>
+<body>
+
+    <script type = "text/javascript">
+
+
+
+function customer(){ 
+        //redirect to customer page.
+        window.location.href = 'CBO_staff'
+            
+        };
+
+
+function staff(){ 
+        //redirect to staff page.
+        window.location.href = 'CBO_admin';
+        
+            
+        };
+
+function Displaycustomer(){
+    window.location.href = 'DisplayCustomer';
+}
+
+
+function DisplayStaff(){
+    window.location.href = 'Displaystaff';
+}
+
+
+function logout(){
+
+    var http = new XMLHttpRequest();
+            var url = '/logout';
+            
+               
+            http.open('GET', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+           
+            
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                result = http.responseText;
+                alert("result");
+                window.location.href = 'login';
+
+
+            
+                  
+                 }
+            };
+        
+            http.send();
+            
+        };
+
+
+
+function updatecustomer(){
+
+    window.location.href = 'Update_customer';
+};
+
+function updateStaff(){
+
+    window.location.href = 'Update_staff';
+
+};
+
+function registerStaff(){ 
+            var http = new XMLHttpRequest();
+            var url = '/registerStaff';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'fname=' + document.getElementById("fname").value + '&lname=' + document.getElementById("lname").value +
+             '&address=' + document.getElementById("address").value + '&password=' + document.getElementById("password").value + 
+             '&role=' + document.getElementById("role").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                var result = JSON.parse(http.responseText);
+                alert("Registration Successful: User : " + result.answer + " added to Staff." );
+                window.location.href = 'CBO_admin';
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+
+
+        function search(){ 
+            var http = new XMLHttpRequest();
+            var url = '/searchStaff';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'staffID=' + document.getElementById("staffID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                
+                     
+                var result = JSON.parse(http.responseText);
+                data = "";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + row.First_Name +" "+row.Last_Name ;
+                
+                 
+            });
+                document.getElementById("answer").value =  data;
+                
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+
+
+        function removeStaff(){ 
+            var http = new XMLHttpRequest();
+            var url = '/removeStaff';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'staffID=' + document.getElementById("staffID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                 var result = JSON.parse(http.responseText);
+                 alert("Staff member removed Succesfully");
+                 window.location.href = 'CBO_admin';
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+     
+    </script>  
+
+       
+<div>
+    <form>
+        <input type="radio" id="Staff" name="feature" checked=true onchange="staff()"> Add/Remove Staff
+        <input type="radio" id="Customer" name="feature"  onchange="customer()"> Add/Remove Customer
+        <input type="radio" id="Customer" name="feature" onchange="updateStaff()"> Update Staff
+        <input type="radio" id="Customer" name="feature" onchange="updatecustomer()"> Update Customer
+        <input type="radio" id="Customer" name="feature" onchange="DisplayStaff()"> Display Staff
+        <input type="radio" id="Customer" name="feature" onchange="Displaycustomer()"> Display Customer
+        <button  onclick= "logout()"> Logout </button>
+    </form>
+
+  
+  </div><br><br>
+
+
+
+
+  <p>
+    Sign up Staff member:
+  </p><br>
+
+  <div>
+  
+    <label for="fname">First Name:</label> &nbsp;&nbsp;
+       <input type="text" id="fname" name="First Name"> <br><br>
+    <label for="lname">Last Name:</label>  &nbsp;&nbsp;
+       <input type="text" id="lname" name="Last Name"> <br><br>
+    <label for="address">Address:</label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="text" id="address" name="Address"> <br><br>
+    <label for="password">Password:</label> &nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="text" id="password" name="Password"> <br><br>
+
+    <label for="role">Role:</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="text" id="role" name="role">  &nbsp;&nbsp; "admin" or "staff", case sensitive.<br><br>
+    </div> <br><br>
+
+    <button  onclick= "registerStaff()"> Register Staff </button>
+    <br><br><br>
+
+    OR<br><br><br><br>
+  
+  <p>
+        
+        Remove staff member by ID: <br><br>
+        
+    </p> 
+    
+    <div>
+
+   
+        <label for="staffID">User ID:</label><br>
+        <input type="text" id="staffID" name="User ID"> 
+        <button  onclick= "search()"> search </button> <br><br>
+        
+
+
+    </div>
+    <p>Staff member found by given ID:</p>
+    <textarea id="answer" rows="1" cols="50">   </textarea><br>
+    <button  onclick= "removeStaff()"> Confirm removal </button>
+    <br><br>
+ 
+   
+
+    
+
+    
+
+    
+
+</body>
+</html>

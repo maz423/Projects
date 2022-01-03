@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Add/remove Customer </title>
+</head>
+<body>
+
+    <script type = "text/javascript">
+
+
+
+function customer(){ 
+        //redirect to customer page.
+        window.location.href = 'CBO_staff'
+            
+        };
+
+
+
+
+function Displaycustomer(){ 
+        
+        window.location.href = 'DisplayCustomer'
+            
+        };
+
+
+
+function updatecustomer(){
+
+        window.location.href = 'Update_customer';
+};
+
+
+
+function registerCustomer(){ 
+            var http = new XMLHttpRequest();
+            var url = '/registerCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'fname=' + document.getElementById("fname").value + '&lname=' + document.getElementById("lname").value +
+             '&address=' + document.getElementById("address").value + '&info=' + document.getElementById("info").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                var result = JSON.parse(http.responseText);
+                alert("Registration Successful: User : " + result.answer + " added to Customer." );
+                window.location.href = 'CBO_staff';
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+
+
+        function search(){ 
+            var http = new XMLHttpRequest();
+            var url = '/searchCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'customerID=' + document.getElementById("customerID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                
+                     
+                var result = JSON.parse(http.responseText);
+                data = "";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + row.First_Name +" "+row.Last_Name ;
+                
+                 
+            });
+                document.getElementById("answer").value =  data;
+                
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+
+
+        function removeCustomer(){ 
+            var http = new XMLHttpRequest();
+            var url = '/removeCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'customerID=' + document.getElementById("customerID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                 var result = JSON.parse(http.responseText);
+                 alert("Customer removed Succesfully");
+                 window.location.href = 'CBO_staff';
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+     
+    </script>  
+
+       
+<div>
+    <form>
+        
+        <input type="radio" id="Customer" name="feature" checked=true onchange="customer()"> Add/Remove Customer
+        <input type="radio" id="Customer" name="feature" onchange="updatecustomer()"> Update Customer
+        <input type="radio" id="Customer" name="feature" onchange="Displaycustomer()"> Display Customer
+    </form>
+
+  
+  </div><br><br>
+
+
+
+
+  <p>
+    Sign up Customer:
+  </p><br>
+
+  <div>
+  
+    <label for="fname">First Name:</label> &nbsp;&nbsp;
+       <input type="text" id="fname" name="First Name"> <br><br>
+    <label for="lname">Last Name:</label>  &nbsp;&nbsp;
+       <input type="text" id="lname" name="Last Name"> <br><br>
+    <label for="address">Address:</label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="text" id="address" name="Address"> <br><br>
+    <label for="info">info:</label> &nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="text" id="info" name="information"> <br><br>
+    </div> <br><br>
+  
+
+    <button  onclick= "registerCustomer()"> Register Customer </button>
+    <br><br><br>
+
+    OR<br><br><br><br>
+
+  <p>
+        
+        Remove Customer by ID: <br><br>
+        
+    </p>  
+
+    <!-- <form action="/search" method="post"> -->
+        <label for="customerID">User ID:</label> <br>
+         
+        <input type="text" id="customerID" name="User ID"> 
+        <button  onclick= "search()"> search </button> <br><br>
+        </form>
+    <p>Customer found by given ID:</p>
+    <textarea id="answer" rows="1" cols="50">   </textarea><br>
+    <button  onclick= "removeCustomer()"> Confirm removal </button>
+    <br><br>
+ 
+   
+
+    
+
+    
+
+    
+
+</body>
+</html>

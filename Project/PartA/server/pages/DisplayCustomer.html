@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helping the ones in need.</title>
+</head>
+<body>
+
+    <script type = "text/javascript">
+
+
+function All(){ 
+            var http = new XMLHttpRequest();
+            var url = '/AllCustomers';
+            
+               
+            http.open('GET', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+           
+            
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                var result = JSON.parse(http.responseText);
+                var data ="";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + "ID: "+row.ID +", Name: "+ row.First_Name +" " + row.Last_Name +", Address: "+ row.Address +", Registration date: "+ row.Date +".\n";
+            });
+                  
+                document.getElementById("answer").value =  data;
+                     
+                }
+            };
+        
+            http.send();
+            
+        };
+
+
+        function byID(){ 
+            var http = new XMLHttpRequest();
+            var url = '/CustomerbyID';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+           
+            var par = 'customerID=' + document.getElementById("customerID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                var result = JSON.parse(http.responseText);
+                var data ="";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + "Customer ID: " + row.ID +","+"\n\n"+"First Name: "+ row.First_Name +","+"\n\n"+"Last Name: " + row.Last_Name +","+"\n\n"+"Address: "+ row.Address +","+"\n\n"+"Registration date: "+ row.Date +","+"\n\n"+"Report:\n\n"+row.info+"."+"\n\n";
+            });
+                  
+                document.getElementById("answer").value =  data;
+                     
+                }
+            };
+        
+            http.send(par);
+            
+        };
+  
+     
+
+    </script>  
+
+       
+    
+    <label>
+        Please make a choice.<br><br>
+        Display Customer by ID or Display all Customers.<br><br>
+    </label>  
+    <div >
+        <button  onclick= "All()"> All Customers </button>
+        &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;
+        <label for="ID">Display Customer by ID:</label> 
+        <input type="text" id="customerID" name="ID"> <button  onclick= "byID()"> Submit </button>
+        
+      </div>
+    
+    
+    
+    
+      
+    
+    
+    
+    <textarea id="answer" rows="50" cols="100">   </textarea>
+
+    
+
+</body>
+</html>

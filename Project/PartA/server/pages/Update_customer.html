@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Homepage admin </title>
+</head>
+<body>
+
+    <script type = "text/javascript">
+
+function search(){ 
+            var http = new XMLHttpRequest();
+            var url = '/searchCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'customerID=' + document.getElementById("customerID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                
+                     
+                var result = JSON.parse(http.responseText);
+                data = "";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + "First Name: "+row.First_Name +",Last Name: "+row.Last_Name +",Address: "+row.Address;
+                
+                 
+            });
+                document.getElementById("answer").value =  data;
+                
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+
+        function updateFname(){
+            var http = new XMLHttpRequest();
+            var url = '/updateCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var command = 'First_Name';
+            var par = 'customerID=' + document.getElementById("customerID").value + '&fname=' + document.getElementById("fname").value + '&command='+ command;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                 
+                 alert("First Name updated Successfully");
+                 window.location.href = 'Update_customer';
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+        };
+
+        function updateLname(){
+
+            var http = new XMLHttpRequest();
+            var url = '/updateCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var command = 'Last_Name';
+            var par = 'customerID=' + document.getElementById("customerID").value + '&lname=' + document.getElementById("lname").value + '&command='+ command;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                 
+                 alert("Last Name updated Successfully");
+                 window.location.href = 'Update_customer';
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+
+
+        };
+
+
+        function updateAddress(){
+
+            var http = new XMLHttpRequest();
+            var url = '/updateCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var command = 'Address';
+            var par = 'customerID=' + document.getElementById("customerID").value + '&address=' + document.getElementById("address").value + '&command='+ command;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                 
+                 alert("Address updated Successfully");
+                 window.location.href = 'Update_customer';
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+            
+        };
+
+
+
+        function Addreport(){
+            var http = new XMLHttpRequest();
+            var url = '/updateCustomer';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var command = 'info';
+            var par = 'customerID=' + document.getElementById("customerID").value + '&report=' + document.getElementById("report").value + '&command='+ command;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                 
+                 alert("Report successfully added");
+                 window.location.href = 'Update_customer';
+                
+
+            
+                  
+                 }
+            };
+        
+            http.send(par);
+        };
+
+
+
+     
+    </script>  
+
+ <p>      
+ Search for customer to update info or add a new report about the Customer:
+</p><br>
+
+<div>
+
+   
+    <label for="customerID">User ID:</label><br>
+    <input type="text" id="customerID" name="User ID"> 
+    <button  onclick= "search()"> search </button> <br><br>
+    
+
+
+</div>
+
+<p>Customer found by given ID:</p>
+    <textarea id="answer" rows="1" cols="100">   </textarea><br>
+    
+<p>
+    Update customer information:
+  </p><br>
+
+  <div>
+  
+    <label for="fname">First Name:</label> &nbsp;&nbsp;
+       <input type="text" id="fname" name="First Name">  <button  onclick= "updateFname()"> update  </button><br><br>
+    <label for="lname">Last Name:</label>  &nbsp;&nbsp;  
+       <input type="text" id="lname" name="Last Name"> <button  onclick= "updateLname()"> update  </button><br><br>
+    <label for="address">Address:</label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="text" id="address" name="Address"> <button  onclick= "updateAddress()"> update  </button><br><br><br><br><br><br>
+       Add a new report about this customer: <br><br><br>
+
+    
+       <input type="text" id="report" name="report" >  &nbsp;&nbsp; 
+    </div> <br><br>
+
+    <button  onclick= "Addreport()"> Add report </button>
+    <br><br><br>
+
+   
+  
+  
+   
+
+    
+
+    
+
+    
+
+</body>
+</html>

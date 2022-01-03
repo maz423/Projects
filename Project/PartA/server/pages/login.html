@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helping the ones in need.</title>
+</head>
+<body>
+
+    <script type = "text/javascript">
+     //check if staff entry exists in the Database.
+
+     function login(){ 
+            var http = new XMLHttpRequest();
+            var url = '/login';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var order = order;
+            var par = 'ID=' + document.getElementById("ID").value + '&password=' + document.getElementById("password").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                var result = http.responseText;
+
+                if(result.localeCompare('admin') == 0){
+                    alert('Welcome '+ result); 
+                    window.location.href = 'CBO_admin'
+                }
+
+                else if(result.localeCompare('staff') == 0){
+                    alert('Welcome '+ result + 'member.'); 
+                    window.location.href = 'CBO_staff'
+                }
+                else{alert(result); }
+                 
+                // var result = JSON.parse(http.responseText);
+                
+
+            //     if(result.length == 0) {
+            //         document.getElementById("answer").value = "Invalid ID";
+            //     }  
+                
+            //     Object.keys(result).forEach(function(key) {
+                
+            //     var row = result[key];
+                
+            //     if(row.password.localeCompare(document.getElementById("password").value) ==0){
+
+            //         if(row.role.localeCompare("admin")==0){
+            //             alert("login as admin sucessfull");
+            //             window.location.href = 'CBO_admin'
+            //         }
+            //         else if (row.role.localeCompare("staff")==0){
+            //             alert("login as staff successful");
+            //             window.location.href = 'CBO_staff'
+
+            //         }
+            //         else{
+            //             alert("Error: role not defined");
+                       
+            //         }
+                    
+            //       }
+
+                
+            //     else{
+            //         document.getElementById("answer").value = "Invalid password";
+
+            //     }
+                 
+            // });
+                  
+            
+                     
+                }
+                else if(http.status == 404){document.getElementById("answer").value = "oops something went wrong";}
+            };
+        
+            http.send(par);
+            
+        };
+
+    </script>  
+
+       
+    
+    <p>
+        Welcome.
+        Please Login wih your registered ID and Password to continue.
+    </p>  
+    <form action="/login" method="post">
+      <label for="ID">User ID:</label><br>
+      <input type="text" id="ID" name="User ID"><br><br>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password"><br><br>
+      </form>
+    
+    
+    
+    
+      <button  onclick= "login()"  > Submit </button>
+    <br>
+    
+    
+    
+    <textarea id="answer" rows="1" cols="50">   </textarea>
+
+    
+
+</body>
+</html>

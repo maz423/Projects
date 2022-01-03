@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helping the ones in need.</title>
+</head>
+<body>
+
+    <script type = "text/javascript">
+
+
+function All(){ 
+            var http = new XMLHttpRequest();
+            var url = '/Allstaff';
+            
+               
+            http.open('GET', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+           
+            
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                var result = JSON.parse(http.responseText);
+                var data ="";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + "ID: "+row.ID +", Name: "+ row.First_Name +" " + row.Last_Name +", Address: "+ row.Address +", Registration date: "+ row.Date + ", Role: "+ row.role +" .\n\n";
+            });
+                  
+                document.getElementById("answer").value =  data;
+                     
+                }
+            };
+        
+            http.send();
+            
+        };
+
+
+        function byID(){ 
+            var http = new XMLHttpRequest();
+            var url = '/StaffbyID';
+            
+               
+            http.open('POST', url, true);
+        
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+           
+            var par = 'staffID=' + document.getElementById("staffID").value;
+        
+            http.onreadystatechange = function() 
+            {   
+                
+                if(http.readyState == 4 && http.status == 200) 
+                {
+                     
+                var result = JSON.parse(http.responseText);
+                var data ="";
+
+                Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                data = data + "Staff ID: " + row.ID +","+"\n\n"+"First Name: "+ row.First_Name +","+"\n\n"+"Last Name: " + row.Last_Name +","+"\n\n"+"Address: "+ row.Address +","+"\n\n"+"Registration date: "+ row.Date +","+"\n\n"+"Role: "+ row.role +".\n\n";
+            });
+                  
+                document.getElementById("answer").value =  data;
+                     
+                }
+            };
+        
+            http.send(par);
+            
+        };
+  
+     
+
+    </script>  
+
+       
+    
+    <label>
+        Please make a choice.<br><br>
+        Display Staff by ID or Display all Staff members.<br><br>
+    </label>  
+    <div >
+        <button  onclick= "All()"> All Staff </button>
+        &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;
+        <label for="ID">Display Staff by ID:</label> 
+        <input type="text" id="staffID" name="ID"> <button  onclick= "byID()"> Submit </button>
+        
+      </div>
+    
+    
+    
+    
+      
+    
+    
+    
+    <textarea id="answer" rows="50" cols="200">   </textarea>
+
+    
+
+</body>
+</html>

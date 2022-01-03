@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+
+
+  server:
+    build:
+       context: ./server
+       dockerfile: ./Dockerfile
+    depends_on:
+      - mysql
+    container_name: Server_react
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./server:/app/src"
+
+    command: "npx nodemon src/server.js"
+
+  client:
+    build:
+         context: ./src
+         dockerfile: ./Dockerfile
+    container_name: Client_react
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/app"
+      
+    
+
+  mysql:
+    image: mysql:5.7.31
+    container_name: Db_react
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    

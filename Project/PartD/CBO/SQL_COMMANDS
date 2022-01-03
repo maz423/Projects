@@ -1,0 +1,33 @@
+CREATE DATABASE CBO;
+
+USE CBO;
+
+CREATE TABLE Staff(
+    ID int NOT NULL AUTO_INCREMENT,
+    First_Name varchar(255),
+    Last_Name varchar(255),
+    Address  varchar(255),
+    Date varchar(255),
+    password varchar(16),
+    role varchar(16),
+    PRIMARY KEY (ID)
+    );
+
+CREATE TABLE Customers(
+    ID int NOT NULL AUTO_INCREMENT,
+    First_Name varchar(255),
+    Last_Name varchar(255),
+    Address  varchar(255),
+    Date varchar(255),
+    info varchar(255),
+    PRIMARY KEY (ID)
+    );
+
+    //insert entries......
+    INSERT INTO Staff (First_Name,Last_Name,Address,Date,password,role) VALUES ('Randomguy','coding',' random address',CURRENT_TIMESTAMP(),'newdata1','admin');
+
+    INSERT INTO Customers (ID,First_Name, Last_Name, Address,Date,info) VALUES (1,'sugarcomb','honeydew','saskatoon',CURRENT_TIMESTAMP(),'Needs help with shelter');
+
+    
+
+

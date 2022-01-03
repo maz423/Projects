@@ -1,0 +1,12 @@
+docker-compose commands:
+- docker-compose build      // builds from the docker-compose.yml file
+- docker-compose up         // starts up all containers built
+- docker-compose down       // brings containers down
+
+when containers are up:
+- docker exec -it CONTAINER-NAME /bin/bash      // start a bash session in the respective container
+
+setting up mysql:
+- enter the mysql container in a bash session
+- mysql -u root -p      // run this in the mysql container's bash session; it will prompt you for a password, this is 'admin' in my example
+
