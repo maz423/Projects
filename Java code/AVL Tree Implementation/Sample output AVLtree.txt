@@ -1,0 +1,199 @@
+*/ Name :Mohammad Aman Zargar
+   NSID: Maz423
+   Student ID :11265940
+/*
+
+
+
+
+Case 1 : Check for LL rotation
+Tree before insertion of element 40 -----------------------------> LL rotation expected
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 70
+1: 
+(L:2,R:1)-->: LVL1: 60
+                                          3: -
+                     2: 
+                     (L:1,R:0)-->: LVL2: 50
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 45
+tree after inertion of element 40 -------------------------------> LL performed succesfully
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 70
+1: 
+(L:2,R:1)-->: LVL1: 60
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 50
+                     2: 
+                     (L:1,R:1)-->: LVL2: 45
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 40
+Case 2 : Check for RR rotation
+Tree before insertion of element 115 -----------------------------> RR rotation expected
+
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 110
+                     2: 
+                     (L:0,R:1)-->: LVL2: 100
+                                          3: -
+1: 
+(L:1,R:2)-->: LVL1: 95
+                     2: 
+                     (L:0,R:0)-->: LVL2: 90
+Tree after insertion of element 115 -----------------------------> RR performed succesfully
+
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 115
+                     2: 
+                     (L:1,R:1)-->: LVL2: 110
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 100
+1: 
+(L:1,R:2)-->: LVL1: 95
+                     2: 
+                     (L:0,R:0)-->: LVL2: 90
+Case 3 : Check for LR rotation
+Tree before insertion of element 48 -----------------------------> insertion causes LR imbalace
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 70
+1: 
+(L:2,R:1)-->: LVL1: 60
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 50
+                     2: 
+                     (L:1,R:1)-->: LVL2: 45
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 40
+Tree after insertion of element 48 -----------------------------> LR imbalance fixed.
+
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 70
+                     2: 
+                     (L:0,R:1)-->: LVL2: 60
+                                          3: -
+1: 
+(L:2,R:2)-->: LVL1: 50
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 48
+                     2: 
+                     (L:1,R:1)-->: LVL2: 45
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 40
+Case 4 : Check for RL rotation
+Tree before insertion of element 98 -----------------------------> insertion causes RL imbalace
+
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 115
+                     2: 
+                     (L:1,R:1)-->: LVL2: 110
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 100
+1: 
+(L:1,R:2)-->: LVL1: 95
+                     2: 
+                     (L:0,R:0)-->: LVL2: 90
+Tree after insertion of element 98 -----------------------------> RL imbalance fixed
+
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 115
+                     2: 
+                     (L:0,R:1)-->: LVL2: 110
+                                          3: -
+1: 
+(L:2,R:2)-->: LVL1: 100
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 98
+                     2: 
+                     (L:1,R:1)-->: LVL2: 95
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 90
+Case 1 : Check for LL imbalance after deletion
+Tree before deletion of element 60 -----------------------------> LL rotation expected
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 60
+1: 
+(L:2,R:1)-->: LVL1: 50
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 48
+                     2: 
+                     (L:1,R:1)-->: LVL2: 45
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 40
+Tree after deletion of element 60 -----------------------------> LL rotation completed succesfully
+
+                                          3: -
+                     2: 
+                     (L:1,R:0)-->: LVL2: 50
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 48
+1: 
+(L:1,R:2)-->: LVL1: 45
+                     2: 
+                     (L:0,R:0)-->: LVL2: 40
+Case 2 : Check for RR imbalance after deletion
+Tree before deletion of element 95 -----------------------------> RR rotation expected
+
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 115
+                     2: 
+                     (L:0,R:1)-->: LVL2: 110
+                                          3: -
+1: 
+(L:1,R:2)-->: LVL1: 100
+                     2: 
+                     (L:0,R:0)-->: LVL2: 95
+Tree after deletion of element 95 -----------------------------> RR rotation completed successfully
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 115
+1: 
+(L:1,R:1)-->: LVL1: 110
+                     2: 
+                     (L:0,R:0)-->: LVL2: 100
+Case 3 : Check for RL imbalance after deletion
+Tree before deletion of element 115 -----------------------------> deletion causes LR imbalance
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 115
+1: 
+(L:2,R:1)-->: LVL1: 110
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 100
+                     2: 
+                     (L:0,R:1)-->: LVL2: 95
+                                          3: -
+Tree after deletion of element 115 -----------------------------> LR imbalance fixed.
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 110
+1: 
+(L:1,R:1)-->: LVL1: 100
+                     2: 
+                     (L:0,R:0)-->: LVL2: 95
+Case 4 : Check for LR imbalance after deletion
+Tree before deletion of element 95 -----------------------------> deletion causes RL imbalance
+
+                                          3: -
+                     2: 
+                     (L:1,R:0)-->: LVL2: 110
+                                          3: 
+                                          (L:0,R:0)-->: LVL3: 105
+1: 
+(L:1,R:2)-->: LVL1: 100
+                     2: 
+                     (L:0,R:0)-->: LVL2: 95
+Tree after deletion of element 95 -----------------------------> RL imbalace fixed.
+
+                     2: 
+                     (L:0,R:0)-->: LVL2: 110
+1: 
+(L:1,R:1)-->: LVL1: 105
+                     2: 
+                     (L:0,R:0)-->: LVL2: 100
+
+Process finished with exit code 0
+
